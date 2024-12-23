@@ -1,10 +1,4 @@
-import React from 'react';
-
-type Props = {};
-
-export const TodosHeader: React.FC<Props> = props => {
-  const {} = props;
-
+export const TodosHeader = () => {
   return (
     <header className="todoapp__header">
       {/* this button should have `active` class only if all todos are completed */}

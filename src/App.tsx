@@ -28,15 +28,15 @@ export const App: React.FC = () => {
 
   const filteredTodos = useMemo(() => {
     return todos.filter(todo => {
-      if (filter === StatusFilter.Active) {
-        return !todo.completed;
+      switch (filter) {
+        case StatusFilter.Active:
+          return !todo.completed;
+        case StatusFilter.Completed:
+          return todo.completed;
+        case StatusFilter.All:
+        default:
+          return true;
       }
-
-      if (filter === StatusFilter.Completed) {
-        return todo.completed;
-      }
-
-      return true;
     });
   }, [todos, filter]);
 
@@ -47,7 +47,7 @@ export const App: React.FC = () => {
       <div className="todoapp__content">
         <TodosHeader />
 
-        {todos.length > 0 && (
+        {!!todos.length && (
           <>
             <TodoList todos={filteredTodos} />
             <TodosFooter filter={filter} setFilter={setFilter} todos={todos} />
